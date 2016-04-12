@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{{ super() }}
+{% block content %}
+<h2>Lampen pagina!</h2>
+<h3>Hier moet nog een omschrijving komen</h3>
+<div class="row">
+    <div class="col-md-2">
+        <a href="add"><button type="button" class="btn btn-primary" id="light-add">Lamp toevoegen</button></a>
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td><h4>Naam</h4></td>
+            <td><h4>Status</h4></td>
+            <td><h4>Verwijderen</h4></td>
+        </tr>
+    </thead>
+    <tbody>
+        <!--<tr>-->
+            <!--<td><h4>Keuken</h4></td>-->
+            <!--<td><a href="#" id="light-switch" data-light="kitchen" data-status="off"><i class="fa fa-toggle-off fa-3x"></i></a></td>-->
+        <!--</tr>-->
+    {% for light in lights %}
+        <tr>
+            <td><h4>{{ light.lightName.title() }}</h4></td>
+            {% set status = light.getStatus() %}
+            <td><a href="#" class="light-switch" data-light="{{ light.lightName }}" data-status="{{ status }}">
+                {% if light.getStatus() == "true" %}
+                    <i class="fa fa-toggle-on fa-3x"></i></a></td>
+                {% else %}
+                    <i class="fa fa-toggle-off fa-3x"></i></a></td>
+                {% endif %}
+            </a></td>
+            <td><a href="#" class="light-delete"><i class="fa fa-times-circle fa-3x"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
